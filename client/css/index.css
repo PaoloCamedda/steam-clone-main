@@ -1,0 +1,70 @@
+
+body {
+    font-size: 8pt;
+    font-family: Tahoma, Verdana, sans-serif;
+}
+
+h1 {
+    background-color: #ff5100;
+    color: #000000;
+    font-size: 1rem;
+}
+
+h3 {
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+
+.movie-list, .profile-table {
+    border: 3px solid #ffc200;
+}
+
+.bg-rottentomatoes {
+    background-color: #ff5100;
+}
+
+.list-group-item {
+    background-color: transparent;
+}
+
+.list-group-item.active {
+    background-color: #ff5100;
+    border-color: #ffc200;
+}
+
+.list-group-item:hover {
+    background-color: #ff5100;
+    border-color: #ffc200;
+}
+
+.dropdown-item {
+    background-color: transparent;
+}
+
+.dropdown-item.active {
+    background-color: #ff5100;
+    border-color: #ff5100;
+}
+
+.dropdown-item:hover {
+    background-color: #ff5100;
+    border-color: #ffc200;
+}
+
+.btn-icon:hover {
+    background-color: #ff5100;
+    border-color: #ffc200;
+}
+
+.btn-success, .btn-outline-success {
+    background-color: #ff5100;
+    border: 1px solid #ffc200;
+    color: #000000;
+}
+
+.form-control {
+    font-size: 0.75rem;
+}
+
+
