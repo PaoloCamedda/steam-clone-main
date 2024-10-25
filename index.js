@@ -1,18 +1,48 @@
 "use strict";
-const express = require('express');
+
+const { app, port } = require ('./init');
+const {check, validationResult} = require('express-validator'); // validation middleware
+var {routerProtected: gamesRouterProtected, routerUnprotected: gamesRouterUnprotected} = require('./routes/games');
+var  {routerProtected: usersRouterProtected, routerUnprotected: usersRouterUnprotected} = require('./routes/users');
+var categoriesRouter = require('./routes/categories');
+var sessionsRouter = require('./routes/sessions');
+const searchRouter = require('./routes/search');
+const autocompleteRouter = require('./routes/autocomplete');
 const path = require('path');
-const app = express();
-const port = 4444; // porta server
+/*
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+*/
 
+/*
+const swaggerDocument = YAML.load('./swagger.yaml');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+*/
 
-app.use(express.static('./client'));
+// check if a given request is coming from an authenticated user
+const isLoggedIn = (req, res, next) => {
+ if(req.isAuthenticated()){
+  return next();
+ }
+ return res.status(401).json({status: 401, message : "not authenticated"});
+}
 
-// Handle routes not found
+app.use('/games', gamesRouterUnprotected);
+app.use('/games', isLoggedIn, gamesRouterProtected);
+
+app.use('/users', usersRouterUnprotected);
+app.use('/users', isLoggedIn, usersRouterProtected);
+
+app.use('/categories', categoriesRouter);
+app.use('/sessions', sessionsRouter);
+
+app.use('/search', searchRouter);
+app.use('/autocomplete', autocompleteRouter);
+
 app.get('*', (req, res) => {
  res.sendFile(path.resolve(__dirname, 'client/index.html'));
-});
+})
 
-// Listen server
 app.listen(port, () => {
- console.log(`server up on ${port}`);
-});
+ console.log(`Server listening on port ${port}`)
+})

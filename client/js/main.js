@@ -1,6 +1,6 @@
 "use strict";
 
-import GameController from "./gameController";
+import GameController from "../js/gameController";
 
 const mainContainer = document.querySelector("main");
 const navbar = document.querySelector("#navLinks")
